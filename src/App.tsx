@@ -1,22 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Navbar from './components/Navbar';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-
+import { Curprice } from './Hook/currentprice';
+import { getParsedCommandLineOfConfigFile } from 'typescript';
+import curTem from './components/curTem';
+import CurTem from './components/curTem';
 function App() {
+
+  //const {curprice,curtime,selected, setSelected} = Curprice()
+
   return (
     <Router>
       <Navbar />
 
-      {/* template for /current */}
-      <div className='text-center space-y-3'>
-        <p className='text-2xl font-semibold'>Current price</p>
-        <p className='text-2xl'>Loading ...</p>
-        <p className='text-2xl'>{(999999999).toLocaleString()} THB</p>
-        <p> (Last updated) </p>
-      </div>
+    
+      <Switch>
 
-      <br />
+        <Route path='/Current'>
+        <CurTem/>
+        </Route>
 
+
+      <Route path='/Historical'>
       {/* template for /history/select */}
       <div className='text-center space-y-3 space-x-3'>
         <p className='text-2xl font-semibold'>Select historical range</p>
@@ -27,11 +32,8 @@ function App() {
         <br />
         <button>Get data</button>
       </div>
-
-      <br />
-
-      {/* template for /history/result */}
-      <div className='text-center space-y-3'>
+       {/* template for /history/result */}
+       <div className='text-center space-y-3'>
         <p className='text-2xl font-semibold'>Historical price</p>
         <p className='text-2xl'>Loading ...</p>
         <p className='text-2xl text-red-500'>There was an error. Please try again later.</p>
@@ -42,15 +44,21 @@ function App() {
           <li className='text-xl'>2021-01-03 - {(3000000).toLocaleString()} THB</li>
         </ul>
       </div>
+      </Route>
 
-      <br />
 
+
+      <Route path='/About'>
       {/* template for about me */}
       <div className='text-center space-y-3'>
         <p className='text-2xl font-semibold'>About me</p>
-        <p className='text-xl'>Chayanin Suatap 610631100</p>
+        <p className='text-xl'>Natcha Silakorn 630610727</p>
       </div>
+      </Route>
 
+      
+
+    </Switch>
     </Router>
   );
 }
