@@ -8,7 +8,7 @@ export const Curprice = () => {
   
 	useEffect(() => {
 	setCurprice(null)
-  //  setCurtime(null)
+ 
 	  axios.get(`https://api.coindesk.com/v1/bpi/currentprice/thb.json${selected}`)
 		.then((resp) => {
       const time = resp.data.time.updated
@@ -16,9 +16,7 @@ export const Curprice = () => {
       const price = resp.data.bpi.THB.rate
       setCurprice(price)
       })
-    //.then((resp) => {setCurtime(resp.data.time.updated)})
 		.catch(err => console.log(err))
-  //})
 	}, [selected])
 
 	return {curprice,curtime,selected, setSelected}
