@@ -1,22 +1,52 @@
-import { HistoryPrice } from "../Hook/historyprice"
+import { HistoryPrice } from '../Hook/historyprice';
 import React, { useState } from 'react';
+//import { Curprice } from "../Hook/currentprice";
+import Showhistory from './showhistory';
+import { useLocation } from 'react-router-dom';
+import { type } from 'node:os';
+
+
 
 const HistoryTem = () => {
   
-//const {data} = HistoryPrice()
-    return (
-       
-    <div className='text-center space-y-3'>
+  function useQuery() {
+    return new URLSearchParams(useLocation().search);
+  }
+let query = useQuery();
+    
+
+interface hisList {
+  key : string;
+  value : string;
+}
+
+const allhis : Array<hisList> = []
+
+      const {alldata,selected, setSelected} = HistoryPrice()
+      if(alldata == "error")
+      {
+        console.log("error")
+      }
+     const a = alldata.split("{").join("").split("}").join("").split("\"").join("")
+     const all = a.split(":").join(" - ").split(",")
+   
+
+    
+    return(
+      <div className='text-center space-y-3'>
      <p className='text-2xl font-semibold'>Historical price</p>
-     <p className='text-2xl'>Loading ...</p>
-     <p className='text-2xl text-red-500'>There was an error. Please try again later.</p>
-     <p className='text-xl font-semibold'> ( From 2021-01-01 To 2021-01-02)</p>
-     <ul>
-       <li className='text-xl'>2021-01-01 - {(1000000).toLocaleString()} THB</li>
-       <li className='text-xl'>2021-01-02 - {(2000000).toLocaleString()} THB</li>
-       <li className='text-xl'>2021-01-03 - {(3000000).toLocaleString()} THB</li>
-     </ul>
+     
+     {alldata === ""? <p className='text-2xl'>Loading ...</p> : 
+     <div>
+     <p className='text-xl font-semibold'> ( From {query.get("start")} To {query.get("end")})</p>
+      { <Showhistory list = {all}/>}
+ </div> }
+     
+    
+     {/* {alldata === "error"? <p className='text-2xl text-red-500'>There was an error. Please try again later.</p>: 
+     <p>There was an error. Please try again later.</p>} */}
    </div>
+
     )
 }
 

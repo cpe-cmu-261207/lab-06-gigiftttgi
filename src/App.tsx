@@ -7,28 +7,11 @@ import { getParsedCommandLineOfConfigFile, isTemplateMiddleOrTemplateTail } from
 import CurTem from './components/curTem';
 import { HistoryPrice } from './Hook/historyprice';
 //import HistoryPrice from './components/HistoryPrice';
+import Historysalecttem from './components/historyselecttem';
+import HistoryTem from './components/historyTem';
 
 
 function App() {
-
-const [fromDate,setfromDate] = useState<string | null>(null);
-const [toDate,settoDate] = useState<string | null>(null);
-
-
-const checkdate = (fromdate : string|null, todate :string|null) =>
-  {
-    if(fromdate == null || todate == null)
-    {
-        alert("Please select start date and end date correctly");
-    }
-    else
-    {
-      HistoryPrice(fromdate, todate)
-      // setfromDate(null)
-      // settoDate(null)
-    }
-    
-  }
 
   return (
     <Router>
@@ -48,20 +31,12 @@ const checkdate = (fromdate : string|null, todate :string|null) =>
 
 
       <Route path='/history/select'>
-      <div className='text-center space-y-3 space-x-3'>
-        <p className='text-2xl font-semibold'>Select historical range</p>
-        <span>From date</span>
-        <input type='date' onChange={e=> setfromDate(e.target.value)}></input>
-        <span>To date</span>
-        <input type='date' onChange={e => settoDate(e.target.value)}></input>
-        <br />
-        <button onClick = {() => checkdate(fromDate,toDate)}>Get data</button>
-        <br/>
-      </div>
-       
+       <Historysalecttem/>
       </Route>
 
-
+      <Route path ='/history/result'> 
+        <HistoryTem/>
+      </Route>
 
       <Route path='/about'>
       {/* template for about me */}
@@ -70,9 +45,6 @@ const checkdate = (fromdate : string|null, todate :string|null) =>
         <p className='text-xl'>Natcha Silakorn 630610727</p>
       </div>
       </Route>
-
-      
-
     </Switch>
     </Router>
   );
