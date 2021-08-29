@@ -16,7 +16,7 @@ const Showhistory : React.FC<prop> = ({list}) => {
             <p className='text-xl font-semibold'> ( From {query.get("start")} To {query.get("end")})</p>
             <ul>
                 { list.map(a => 
-                    <li className='text-xl'>{a} THB</li> )} 
+                    <li className='text-xl'>{a}</li> )} 
             </ul>
     </div>
     )
