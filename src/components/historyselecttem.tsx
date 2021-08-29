@@ -28,12 +28,15 @@ const Historysalecttem = () =>{
                 alert("Please select start date and end date correctly");
             else
             {
-                if(parseInt(start[2]) > parseInt(end[2]))
-                    alert("Please select start date and end date correctly");
+                if(parseInt(start[1]) < parseInt(end[1]))
+                    history.push('/history/result?start='+fromDate+'&end='+toDate)
                 else
+                    {if(parseInt(start[2]) > parseInt(end[2]))
+                        alert("Please select start date and end date correctly");
+                    else
                     {
                         history.push('/history/result?start='+fromDate+'&end='+toDate)
-                    }
+                    }}
             }
         }
     }

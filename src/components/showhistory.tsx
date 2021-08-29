@@ -4,9 +4,6 @@ import { useLocation } from "react-router-dom";
     list : string[]
 }
   
-   
-      
-
 const Showhistory : React.FC<prop> = ({list}) => {
  
     function useQuery() {
